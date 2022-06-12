@@ -2,11 +2,19 @@ import React from 'react'
 import './Header.css'
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import { Link } from "react-router-dom";
+import { useStateValue } from './StateProvider';
+// import { SportsBasketballTwoTone } from '@mui/icons-material';
 function Header() {
+  const[{basket},dispatch]=useStateValue();
   var webpack = require('./amazon_PNG.png');
   return (
     <div className='header'>
-        <img className="header__logo" src={webpack} />
+      
+    <Link to='/' >
+    <img className="header__logo" src={webpack} />
+    </Link>
+     
         <div className="header__search">
         <input type="text" className="header__searchInput" />
         <SearchIcon className="header__searchIcon"/>
@@ -24,10 +32,13 @@ function Header() {
           <span className="header__optionLineOne"> Your</span>
           <span className="header__optionLineTwo"> Prime</span>
           </div>
+          <Link to='/checkout'>
           <div className="header__optionBasket">
             <ShoppingBasketIcon/>
-            <span className="header__optionLineTwo header__basketC">0</span>
+            <span className="header__optionLineTwo header__basketC">{basket?.length}</span>
           </div>
+          </Link>
+         
         </div>
     </div>
   )
